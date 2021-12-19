@@ -1,3 +1,5 @@
+// Package org retrives info about repositories of selected
+// organization on github.com.
 package org
 
 import (
@@ -22,5 +24,5 @@ func Init(log *kiwi.Logger, orgname, key string) *org {
 		&oauth2.Token{AccessToken: key},
 	)
 	tc := oauth2.NewClient(ctx, ts)
-	return &org{name: orgname, c: github.NewClient(tc), l: log}
+	return &org{name: orgname, c: github.NewClient(tc), l: log.Fork()}
 }

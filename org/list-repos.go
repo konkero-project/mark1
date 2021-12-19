@@ -6,13 +6,13 @@ import (
 	"github.com/google/go-github/v41/github"
 )
 
-type Repo struct {
+type RepoInfo struct {
 	Name     string
 	Desc     string
 	CloneURL string
 }
 
-func (o *org) RepoList(ctx context.Context) ([]Repo, error) {
+func (o *org) RepoList(ctx context.Context) ([]RepoInfo, error) {
 	var err error
 	opt := &github.RepositoryListByOrgOptions{
 		Type:        "private",
@@ -38,14 +38,14 @@ func (o *org) RepoList(ctx context.Context) ([]Repo, error) {
 		opt.Page = resp.NextPage
 	}
 	var (
-		list []Repo
+		list []RepoInfo
 		desc string
 	)
 	for _, v := range repos {
 		if v.Description != nil {
 			desc = *v.Description
 		}
-		list = append(list, Repo{*v.Name, desc, *v.CloneURL})
+		list = append(list, RepoInfo{*v.Name, desc, *v.CloneURL})
 	}
 	return list, err
 }

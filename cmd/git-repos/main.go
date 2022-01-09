@@ -23,7 +23,7 @@ func main() {
 	ctx := context.Background()
 	makeRepoList(ctx, log)
 	w.SetContent(repocard.MakeGrid())
-	massops.HandleJobs(ctx)
+	massops.HandleJobs(ctx, log)
 	w.ShowAndRun()
 }
 
